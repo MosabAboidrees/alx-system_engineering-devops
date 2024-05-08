@@ -1,3 +1,3 @@
-# **_Networking basics_**
+# Networking basics
 
 
