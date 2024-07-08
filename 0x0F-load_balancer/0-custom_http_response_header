@@ -11,7 +11,8 @@ echo -e "Updating and doing some minor checks...\n"
 # Function to install a package if it is not already installed
 function install() {
     command -v "$1" &> /dev/null  # Check if the command exists
-
+	
+	#shellcheck disable=SC2181
     if [ $? -ne 0 ]; then  # If the command does not exist
         echo -e "    Installing: $1\n"
         sudo apt-get update -y -qq && \
