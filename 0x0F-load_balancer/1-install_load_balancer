@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 # This script installs and configures HAProxy on a new Ubuntu machine
-# to distribute traffic to web-01 and web-02 using a round-robin algorithm
+
+# It sets up HAProxy to distribute traffic to web-01 and web-02 using a round-robin algorithm
+
+# Uncomment the next line to see each command as it runs for debugging purposes
+# set -x
 
 echo -e "Updating and doing some minor checks...\n"
 
