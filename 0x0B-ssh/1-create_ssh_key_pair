@@ -6,4 +6,4 @@ KEY_NAME="school"
 PASSPHRASE="betty"
 
 # Generate the RSA key pair with 4096 bits
-ssh-keygen -t rsa -b 4096 -f "$KEY_NAME" -N "$PASSPHRASE"
+ssh-keygen -b 4096 -f "$KEY_NAME" -N "$PASSPHRASE"
