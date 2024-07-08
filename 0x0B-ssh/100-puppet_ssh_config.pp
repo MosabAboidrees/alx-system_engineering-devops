@@ -1,14 +1,14 @@
 # Puppet manifest to configure SSH client
 
 # Define the SSH config file path
-$ssh_config_file = '/home/vagrant/.ssh/config'
+$ssh_config_file = '/etc/ssh/ssh_config'
 
 # Ensure the directory exists
-file { '/home/vagrant/.ssh':
-  ensure => directory,
-  owner  => 'vagrant',
-  group  => 'vagrant',
-  mode   => '0700',
+file { $ssh_config_file:
+  ensure => present,
+  owner  => 'root',
+  group  => 'root',
+  mode   => '0644',
 }
 
 # Ensure the SSH config file exists
