@@ -6,18 +6,6 @@ $ssh_config_file = '/etc/ssh/ssh_config'
 # Ensure the directory exists
 file { $ssh_config_file:
   ensure => present,
-  owner  => 'root',
-  group  => 'root',
-  mode   => '0644',
-}
-
-# Ensure the SSH config file exists
-file { $ssh_config_file:
-  ensure  => file,
-  owner   => 'vagrant',
-  group   => 'vagrant',
-  mode    => '0600',
-  require => File['/home/vagrant/.ssh'],
 }
 
 # Configure the SSH client to use the private key ~/.ssh/school
