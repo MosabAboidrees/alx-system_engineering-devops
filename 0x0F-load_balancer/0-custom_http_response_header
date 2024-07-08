@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # duplicate web-01 to web-02
-# This script sets up Nginx on a new server with custom configurations
-# It includes a custom HTTP response header and specific error page handling
 
+# This script installs and configures Nginx on a new Ubuntu machine
+# It sets up a simple web server with a custom index page and a custom 404 error page
+# It also redirects /redirect_me to a specific URL
 # Uncomment the next line to see each command as it runs for debugging purposes
 # set -x
 
@@ -11,7 +12,7 @@ echo -e "Updating and doing some minor checks...\n"
 # Function to install a package if it is not already installed
 function install() {
     command -v "$1" &> /dev/null  # Check if the command exists
-	
+
 	#shellcheck disable=SC2181
     if [ $? -ne 0 ]; then  # If the command does not exist
         echo -e "    Installing: $1\n"
