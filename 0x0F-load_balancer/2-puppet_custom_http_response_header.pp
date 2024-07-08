@@ -12,8 +12,8 @@ package { 'nginx':
 
 # Ensure the Nginx service is running and enabled
 service { 'nginx':
-  ensure     => running,
-  enable     => true,
+  ensure  => running,
+  enable  => true,
   require => Package['nginx']
 }
 
@@ -24,11 +24,11 @@ file { '/var/www/html/index.html':
 }
 
 exec {'redirect_me':
-	command => 'sed -i "24i\	rewrite ^/redirect_me https://th3-gr00t.tk/ permanent;" /etc/nginx/sites-available/default',
-	provider => 'shell'
+    command  => 'sed -i "24i\	rewrite ^/redirect_me https://th3-gr00t.tk/ permanent;" /etc/nginx/sites-available/default',
+    provider => 'shell'
 }
 
 exec {'HTTP header':
-	command => 'sed -i "25i\	add_header X-Served-By \$hostname;" /etc/nginx/sites-available/default',
-	provider => 'shell'
+    command  => 'sed -i "25i\	add_header X-Served-By \$hostname;" /etc/nginx/sites-available/default',
+    provider => 'shell'
 }
