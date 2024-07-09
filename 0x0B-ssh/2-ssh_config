@@ -1,3 +1,7 @@
-Host ubuntu@54.164.103.64
+Host *
+    SendEnv LANG LC_*
+    HashKnownHosts yes
+    GSSAPIAuthentication yes
+    GSSAPIDelegateCredentials no
     IdentityFile ~/.ssh/school
     PasswordAuthentication no
