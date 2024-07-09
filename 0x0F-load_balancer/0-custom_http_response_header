@@ -96,6 +96,8 @@ sudo nginx -t
 # Restart Nginx to apply changes
 if [ "$(pgrep -c nginx)" -le 0 ]; then
     sudo service nginx start  # Start Nginx if it's not running
+    exit 0
 else
     sudo service nginx restart  # Restart Nginx if it's already running
+    exit 1
 fi
