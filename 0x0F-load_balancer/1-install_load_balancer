@@ -1,11 +1,18 @@
 #!/usr/bin/env bash
-# install load balancer
+# Install load balancer
 
+# Update package list
 sudo apt-get -y update
-sudo apt-get -y install haproxy
-sudo chown $USER:USER /etc/haproxy/haproxy.cfg
 
-echo "
+# Install HAProxy
+sudo apt-get -y install haproxy
+
+# Correct ownership (if needed)
+# sudo chown $USER:$USER /etc/haproxy/haproxy.cfg
+
+# Append HAProxy configuration
+sudo bash -c 'cat <<EOF >> /etc/haproxy/haproxy.cfg
+
 frontend mosab
     bind *:80
     mode http
@@ -14,6 +21,8 @@ frontend mosab
 backend app
     balance roundrobin
     server 525150-web-01 100.26.230.160:80 check
-    server 525150-web-02 100.25.109.10:80 check" >> /etc/haproxy/haproxy.cfg
+    server 525150-web-02 100.25.109.10:80 check
+EOF'
 
+# Restart HAProxy service
 sudo service haproxy restart
