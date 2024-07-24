@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# This script fixes the Apache setup to return "Hello Holberton" when querying the root
+
+# Update package list
+apt-get update -y
+
+# Check if Apache is installed, if not, install it
+if ! command -v apache2 &> /dev/null; then
+    apt-get install apache2 -y
+fi
+
+# Start Apache service
+service apache2 start
+
+# Create a custom index.html page with the content "Hello Holberton"
+echo "Hello Holberton" | sudo tee -a /var/www/html/index.html
+
+# Restart Apache service to apply changes
+service apache2 restart
