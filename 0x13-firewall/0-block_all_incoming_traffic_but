@@ -1,23 +1,29 @@
-echo -e "Updating\n"
+#!/usr/bin/env bash
 
+# Echo statements for better visibility
+echo -e "Updating package list\n"
 sudo apt-get update
 
 echo -e "Installing UFW\n"
-
 sudo apt-get install -y ufw
 
-echo -e "configuring UFW...\n"
+echo -e "Configuring UFW...\n"
 
-# Allow Outgoing and Deny Incoming
+# Set default policies
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
 
-# Allow ports
-sudo ufw allow 22
-sudo ufw allow 80
-sudo ufw allow 443
+# Allow specific ports
+sudo ufw allow 22/tcp   # SSH
+sudo ufw allow 80/tcp   # HTTP
+sudo ufw allow 443/tcp  # HTTPS
 
-# Enable Fire Wall
-sudo ufw enable
+# Enable UFW and confirm
+echo -e "Enabling UFW\n"
+sudo ufw --force enable
+
+# Show UFW status and rules
+echo -e "UFW Status and Rules:\n"
+sudo ufw status verbose
 
 echo -e "Process Completed.\n"
