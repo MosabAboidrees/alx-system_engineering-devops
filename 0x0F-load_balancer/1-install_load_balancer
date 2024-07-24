@@ -65,8 +65,8 @@ frontend clickviral-tech-frontend
 
 backend clickviral-tech-backend
     balance roundrobin
-    server 525150-web-01 54.88.149.30:80 check
-    server 525150-web-02 34.229.72.173:80 check
+    server 525150-web-01 100.26.230.160:80 check
+    server 525150-web-02 100.25.109.10:80 check
 "
 
 # Write the configuration to HAProxy config file
