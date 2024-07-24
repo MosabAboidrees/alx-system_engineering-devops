@@ -1,34 +1,46 @@
-# Puppet manifest to configure Nginx with a custom HTTP header
+# This Puppet manifest configures Nginx to include a custom HTTP header 'X-Served-By'
+# with the value being the hostname of the server.
 
-exec { 'update system':
-    command => '/usr/bin/apt-get update',
+node default {
+    # Ensure Nginx is installed
+    package { 'nginx':
+        ensure => installed,
+    }
+
+    # Ensure Nginx service is running and enabled
+    service { 'nginx':
+        ensure     => running,
+        enable     => true,
+        require    => Package['nginx'],
+        subscribe  => File['/etc/nginx/sites-available/default'],
+    }
+
+    # Manage the default site configuration to include the custom header
+    file { '/etc/nginx/sites-available/default':
+        ensure  => file,
+        content => template('nginx/default.erb'),
+        notify  => Service['nginx'],
+    }
+
+    # Ensure the hostname fact is available
+    package { 'facter':
+        ensure => installed,
+    }
 }
 
-# Ensure the Nginx package is installed
-package { 'nginx':
-  ensure  => 'installed',
-  require => Exec['update system']
-}
+# Create a template for the Nginx default site configuration
+file { '/etc/puppetlabs/code/environments/production/modules/nginx/templates/default.erb':
+    ensure  => file,
+    content => '
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
 
-# Ensure the Nginx service is running and enabled
-service { 'nginx':
-  ensure  => running,
-  enable  => true,
-  require => Package['nginx']
-}
+    server_name _;
 
-# Define the custom Nginx configuration
-file { '/var/www/html/index.html':
-  content => 'Hello World!'
-  notify  => Service['nginx'],
+    location / {
+        add_header X-Served-By <%= @hostname %>;
+    }
 }
-
-exec {'redirect_me':
-    command  => 'sed -i "24i\	rewrite ^/redirect_me https://th3-gr00t.tk/ permanent;" /etc/nginx/sites-available/default',
-    provider => 'shell'
-}
-
-exec {'HTTP header':
-    command  => 'sed -i "25i\	add_header X-Served-By \$hostname;" /etc/nginx/sites-available/default',
-    provider => 'shell'
+',
 }
