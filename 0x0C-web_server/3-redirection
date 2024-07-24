@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# This script configures an Ubuntu machine to install Nginx and set up a 301 redirection
+
+# Update package list and install nginx
+echo -e "Updating and installing Nginx.\n"
+sudo apt-get update -y -qq && \
+    sudo apt-get install nginx -y
+
+echo -e "\nSetting up some minor stuff.\n"
+
+# Start nginx service
+sudo service nginx start
+
+# Allow nginx on firewall
+sudo ufw allow 'Nginx HTTP'
+
+# Give the user ownership to website files for easy editing
+sudo chown -R "$USER":"$USER" /var/www/html
+sudo chmod -R 755 /var/www
+
+# Backup default index
+cp /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html.bckp
+
+# Create new index
+echo -e "Hello World!" > /var/www/html/index.nginx-debian.html
+
+# Configure Nginx to add a 301 redirection
+sudo sed -i '/server_name _;/a location /redirect_me {\n\treturn 301 https://www.youtube.com/playlist?list=PLOyYkgaF0he8ucYOz6S_RXFhDKdK2l89a;\n}' /etc/nginx/sites-available/default
+
+# Restart nginx to apply changes
+sudo service nginx restart
+
+echo -e "\nCompleted. ✅\n"
