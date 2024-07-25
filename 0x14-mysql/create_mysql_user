@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# This script creates a MySQL user 'holberton_user' with the necessary permissions
+
+# User and password to create
+USER="holberton_user"
+PASSWORD="projectcorrection280hbtn"
+
+# Create the user and grant permissions
+sudo mysql -u root -e "CREATE USER '$USER'@'localhost' IDENTIFIED BY '$PASSWORD';"
+sudo mysql -u root -e "GRANT REPLICATION CLIENT ON *.* TO '$USER'@'localhost';"
+sudo mysql -u root -e "FLUSH PRIVILEGES;"
+
+echo "User $USER created and granted REPLICATION CLIENT permissions."

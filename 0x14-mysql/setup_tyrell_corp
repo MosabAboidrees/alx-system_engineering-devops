@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# This script creates a database, table, and inserts a row for replication setup
+
+# Database and table details
+DB_NAME="tyrell_corp"
+TABLE_NAME="nexus6"
+USER="holberton_user"
+PASSWORD="projectcorrection280hbtn"
+
+# Connect to MySQL and execute the commands
+sudo mysql -u root <<EOF
+CREATE DATABASE IF NOT EXISTS $DB_NAME;
+USE $DB_NAME;
+CREATE TABLE IF NOT EXISTS $TABLE_NAME (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+INSERT INTO $TABLE_NAME (name) VALUES ('Leon');
+GRANT SELECT ON $DB_NAME.$TABLE_NAME TO '$USER'@'localhost';
+FLUSH PRIVILEGES;
+EOF
+
+echo "Database, table, and user permissions have been set up successfully."
