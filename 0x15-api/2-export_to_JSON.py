@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 """ Gather data from an API """
 import csv
 import json
@@ -113,8 +112,8 @@ def save_tasks_to_csv(tasks_data, users_data, user_id):
 
     with open(f'{user_id}.csv', mode='w', newline='') as csv_file:
         csv_writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
-        for row in user_reco
-        csv_writer.writerow(row)
+        for row in user_records:
+            csv_writer.writerow(row)
 
 
 def save_tasks_to_json(tasks_data, users_data, user_id):
