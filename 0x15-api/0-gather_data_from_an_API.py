@@ -10,7 +10,7 @@ def to_do_list(emp_id):
 
     url = "https://jsonplaceholder.typicode.com/users"
     user_response = requests.get(f"{url}/{emp_id}")
-    
+
     if user_response.status_code != 200:
         print(f"Error: Employee ID {emp_id} not found.")
         return
@@ -21,12 +21,14 @@ def to_do_list(emp_id):
     if name:
         todos_response = requests.get(f"{url}/{emp_id}/todos")
         todos_data = todos_response.json()
-        
+
         total_tasks = len(todos_data)
-        completed_tasks = [task for task in todos_data if task.get("completed")]
+        completed_tasks = [task for task in todos_data if task.get/
+                ("completed")]
         num_completed_tasks = len(completed_tasks)
 
-        print(f"Employee {name} is done with tasks({num_completed_tasks}/{total_tasks}):")
+        print(f"Employee {name} is done with tasks/
+                ({num_completed_tasks}/{total_tasks}):")
 
         for task in completed_tasks:
             print(f"\t {task.get('title')}")
