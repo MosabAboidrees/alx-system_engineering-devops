@@ -60,4 +60,3 @@ def recurse(subreddit, hot_list=[]):
     else:
         # Return None if an error occurs during the request
         return None
-
