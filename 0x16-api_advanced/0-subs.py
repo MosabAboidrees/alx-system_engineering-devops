@@ -27,7 +27,7 @@ def number_of_subscribers(subreddit):
     headers = {'User-agent': 'Google Chrome Version 81.0.4044.129'}
 
     # Construct the URL to access the subreddit's about.json data
-    url = f'https://www.reddit.com/r/{subreddit_name}/about.json'
+    url = f'https://www.reddit.com/r/{subreddit}/about.json'
 
     # Send the GET request to the Reddit API
     response = get(url, headers=headers)
