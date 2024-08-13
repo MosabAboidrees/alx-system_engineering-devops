@@ -7,7 +7,7 @@ to return the number of subscribers for a given subreddit.
 import requests
 
 
-def number_of_subscribers(subreddit):
+def number_of_subscribers(subreddit_name):
     """
     Queries the Reddit API and returns the number of subscribers
     for a given subreddit. If an invalid subreddit is given,
@@ -24,20 +24,17 @@ def number_of_subscribers(subreddit):
         return 0
 
     # Define the User-Agent header to mimic a browser request
-    headers = {
-        'User-Agent': 'Edg Version 127.0.2651.98'
-    }
+    headers = {'User-agent': 'Google Chrome Version 81.0.4044.129'}
 
     # Construct the URL to access the subreddit's about.json data
     url = f'https://www.reddit.com/r/{subreddit_name}/about.json'
 
+    # Send the GET request to the Reddit API
+    response = get(url, headers=headers)
+
+    # Parse the JSON response
+    subreddit_data = response.json()
     try:
-        # Send the GET request to the Reddit API
-        response = get(url, headers=headers)
-
-        # Parse the JSON response
-        subreddit_data = response.json()
-
         # Return the number of subscribers, or 0 if the key is not found
         return subreddit_data.get('data', {}).get('subscribers', 0)
 
