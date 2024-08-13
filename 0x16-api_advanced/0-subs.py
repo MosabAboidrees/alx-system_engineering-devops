@@ -26,6 +26,9 @@ def number_of_subscribers(subreddit):
                x64) AppleWebKit/537.36 (KHTML, like Gecko)\
                    Chrome/127.0.0.0 Safari/537.36 Edg/127.0.2651.98'}
 
+    if subreddit is None or not isinstance(subreddit, str):
+        return 0
+
     # allow_redirects=False to avoid redirection to the search page
     response = requests.get(url, headers=headers, allow_redirects=False)
     # 200 is the status code for a successful HTTP request
