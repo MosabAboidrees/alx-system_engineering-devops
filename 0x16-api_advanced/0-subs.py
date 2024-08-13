@@ -7,7 +7,7 @@ to return the number of subscribers for a given subreddit.
 import requests
 
 
-def number_of_subscribers(subreddit_name):
+def number_of_subscribers(subreddit):
     """
     Queries the Reddit API and returns the number of subscribers
     for a given subreddit. If an invalid subreddit is given,
@@ -20,7 +20,7 @@ def number_of_subscribers(subreddit_name):
         int: The number of subscribers, or 0 if subreddit is invalid.
     """
     # Validate the subreddit_name argument
-    if not subreddit_name or not isinstance(subreddit_name, str):
+    if not subreddit or not isinstance(subreddit, str):
         return 0
 
     # Define the User-Agent header to mimic a browser request
