@@ -31,14 +31,14 @@ def count_words(subreddit, word_list, after="", word_count=[]):
     response = requests.get(url,
                             params={'after': after},
                             allow_redirects=False,
-                            headers={'User-Agent': 'api_advanced-project'})
+                            headers={'User-Agent': 'bhalut'})
 
     if response.status_code == 200:
         # Parse the JSON data from the response
         data = response.json()
 
         # Iterate through each post title
-        for post in data['data']['children']:
+        for post in (data['data']['children']):
             title_words = post['data']['title'].split()
             for word in title_words:
                 for i in range(len(word_list)):
@@ -70,7 +70,7 @@ def count_words(subreddit, word_list, after="", word_count=[]):
 
             # Print the results, excluding duplicates
             for i in range(len(word_list)):
-                if word_count[i] > 0 and i not in duplicates:
+                if (word_count[i] > 0) and i not in duplicates:
                     print("{}: {}".format(word_list[i].lower(), word_count[i]))
         else:
             # Recursively call the function to process the next page of results
